@@ -82,15 +82,15 @@ public class Graph {
                     Object element = startCity.get(j);
                     //If the element is a list, it means that the user needs to be asked what they want here.
                     if(element instanceof List){
-                        List<String> tiposClima = (List<String>) element;
+                        List<String> weather = (List<String>) element;
                         System.out.println("De "+SupportFunctions.getKeyfromValue(kValue,i)+" a "+SupportFunctions.getKeyfromValue(kValue,j)+" que clima hay?");
                         System.out.println("0) Clima Normal\n1) Con lluvia\n2) Con Nieve\n3) Con Tormenta");
                         String opc = sc.nextLine();
-                        int clima = 0;
+                        int typeW = 0;
                         if(opc.equals("0") || opc.equals("1") || opc.equals("2") || opc.equals("3")){
-                            clima = Integer.parseInt(opc);
+                            typeW = Integer.parseInt(opc);
                         }
-                        NstartCity.add(Integer.parseInt(tiposClima.get(clima)));
+                        NstartCity.add(Integer.parseInt(weather.get(typeW)));
                     }else{
                         //If it's not a list, it means there's no path
                         NstartCity.add("NE");

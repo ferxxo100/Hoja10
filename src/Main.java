@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Vector;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -66,9 +63,94 @@ public class Main {
             }else if(opc.equals("2")){
                 System.out.println("La ciudad centro es: "+graph.centerCity(kValue));
             }else if(opc.equals("3")){
-                System.out.println("Que desea modificar?\n");
+                System.out.println("Que desea modificar?\n0) Hay interrumpcion entre dos ciudades" +
+                        "\n1) Establecer conexion entre dos ciudades");
+                opc = sc.nextLine();
+                if(opc.equals("0") || opc.equals("1")){
+                    //------------start City----------------------
+                    System.out.println("Ingrese de la ciudad de la que sale");
+                    for(int i=0;i<kValue.size();i++){
+                        System.out.println(i+") "+SupportFunctions.getKeyfromValue(kValue,i));
+                    }
+                    String sCity = sc.nextLine();
+                    //------------final City---------------------
+                    System.out.println("Ingrese a la ciudad a la que quiere llegar");
+                    for(int i=0;i<kValue.size();i++){
+                        System.out.println(i+") "+SupportFunctions.getKeyfromValue(kValue,i));
+                    }
+                    String fCity = sc.nextLine();
+                    //--------------------------------------------
+                    if(sCity.matches(regex)){
+                        if(fCity.matches(regex)){
+                            int sCityN = Integer.parseInt(sCity);
+                            int fCityN = Integer.parseInt(fCity);
+                            //------------------------------------------------
+                            if((sCityN >= 0 && sCityN<kValue.size()) && (fCityN >= 0 && fCityN<kValue.size())){
+                                if(opc.equals("0")){
+                                    finalVector.get(sCityN).set(fCityN,"NE");
+                                }else {
+                                    System.out.println("Ingrese el tiempo entre las dos ciudades con los siguentes climas");
+                                    System.out.println("Clima normal");
+                                    String normal = sc.nextLine();
+                                    System.out.println("Clima con lluvia");
+                                    String rain = sc.nextLine();
+                                    System.out.println("Clima con nieve");
+                                    String snow = sc.nextLine();
+                                    System.out.println("Clima con tormenta");
+                                    String storm = sc.nextLine();
+                                    initialVector.get(sCityN).set(fCityN,Arrays.asList(normal,rain,snow,storm));
+                                    finalVector.get(sCityN).set(fCityN,Integer.parseInt(normal));
+                                }
+                                //--------------------------------------
+                                graph.floydAlgorithm(finalVector, kValue);
+                                //-------------------------------------
+                            }
+                            //------------------------------------------------------
+                        }
+                    }
+                    //------------------------------------------
+                }
             }else if(opc.equals("4")){
-
+                //------------start City----------------------
+                System.out.println("Ingrese de la ciudad de la que sale");
+                for(int i=0;i<kValue.size();i++){
+                    System.out.println(i+") "+SupportFunctions.getKeyfromValue(kValue,i));
+                }
+                String sCity = sc.nextLine();
+                //------------final City---------------------
+                System.out.println("Ingrese a la ciudad a la que quiere llegar");
+                for(int i=0;i<kValue.size();i++){
+                    System.out.println(i+") "+SupportFunctions.getKeyfromValue(kValue,i));
+                }
+                String fCity = sc.nextLine();
+                //--------------------------------------------
+                if(sCity.matches(regex)){
+                    if(fCity.matches(regex)){
+                        int sCityN = Integer.parseInt(sCity);
+                        int fCityN = Integer.parseInt(fCity);
+                        //------------------------------------------------
+                        if((sCityN >= 0 && sCityN<kValue.size()) && (fCityN >= 0 && fCityN<kValue.size())){
+                            if(initialVector.get(sCityN).get(fCityN) instanceof List){
+                                //--------------------------------------------------
+                                List<String> weather = (List<String>) initialVector.get(sCityN).get(fCityN) ;
+                                System.out.println("De "+SupportFunctions.getKeyfromValue(kValue,sCityN)+" a "+SupportFunctions.getKeyfromValue(kValue,fCityN)+" que clima hay?");
+                                System.out.println("0) Clima Normal\n1) Con lluvia\n2) Con Nieve\n3) Con Tormenta");
+                                opc = sc.nextLine();
+                                int typeW = 0;
+                                if(opc.equals("0") || opc.equals("1") || opc.equals("2") || opc.equals("3")){
+                                    typeW = Integer.parseInt(opc);
+                                }
+                                finalVector.get(sCityN).set(fCityN,Integer.parseInt(weather.get(typeW)));
+                                graph.floydAlgorithm(finalVector,kValue);
+                                //--------------------------------------------------
+                            }else{
+                                System.out.println("No existe relacion entre esas ciudades");
+                            }
+                        }
+                        //------------------------------------------------------
+                    }
+                }
+                //------------------------------------------
             }
         }
     }
