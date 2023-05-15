@@ -12,7 +12,54 @@ public class Graph {
         this.sc = new Scanner(System.in);
     }
 
-
+    /**
+     *Calculate the center of the matrix using the one created by the Floyd algorithm
+     * @param kValue
+     * @return
+     */
+    public String centerCity(HashMap<String,Integer> kValue){
+        //------------------------------------
+        Vector<Object> maxVector = new Vector<>();
+        //------------------------------------
+        for(int i=0;i<kValue.size();i++){
+            Vector<Object> pos = floydVector.get(i);
+            if(i==0){
+                maxVector = pos;
+            }else{
+                for(int j=0;j<pos.size();j++){
+                    if(!maxVector.get(j).equals("NE")){
+                        if(pos.get(j).equals("NE")){
+                            maxVector.set(j,"NE");
+                        }else if((int)(maxVector.get(j))<(int)(pos.get(j))){
+                            maxVector.set(j,pos.get(j));
+                        }
+                    }
+                }
+            }
+        }
+        //-----------------------------------
+        System.out.println(maxVector);
+        Object center = 0;
+        int contN = 0;
+        //-----------------------------------
+        while(contN < maxVector.size()){
+            if(contN == 0){
+                center = maxVector.get(0);
+            }else if(!maxVector.get(contN).equals("NE")){
+                if(center.equals("NE")){
+                    center = maxVector.get(contN);
+                }else{
+                    if((int) maxVector.get(contN) < (int) center){
+                        center = maxVector.get(contN);
+                    }
+                }
+            }
+            contN++;
+        }
+        //-----------------------------------
+        int posValue = maxVector.indexOf(center);
+        return SupportFunctions.getKeyfromValue(kValue,posValue);
+    }
 
     /**
      * After reading the file and creating the matrix where the weather times will be stored,
@@ -70,11 +117,14 @@ public class Graph {
      * @param kValue
      * @return
      */
-    public Vector<Vector<Object>> FloydAlgorithm(Vector<Vector<Object>> finalVector, HashMap<String,Integer> kValue){
+    public Vector<Vector<Object>> floydAlgorithm(Vector<Vector<Object>> finalVector, HashMap<String,Integer> kValue){
+        //----------------------------------------------------------------
         Vector<Vector<Object>> shortRoute =  new Vector<Vector<Object>>();
         Vector<Vector<Object>> cities =  new Vector<Vector<Object>>(); //Create the matrix for the routes between the cities.
+        //----------------------------------------------------------------
         int cont = 0;
         for(int i = 0;i<finalVector.size();i++){
+            //----------------------------------------------------------------
             //Create a copy to not affect the original matrix
             Vector<Object> ci = new Vector<>();
             for(int j=0;j<kValue.size();j++){
@@ -86,8 +136,10 @@ public class Graph {
             }
             cont++;
             cities.add(ci);
+            //----------------------------------------------------------------
         }
 
+        //----------------------------------------------------------------
         for (int i = 0;i<finalVector.size();i++){
             Vector<Object> destino = finalVector.get(i);
             Vector<Object> copia = new Vector<>();
@@ -96,11 +148,13 @@ public class Graph {
             }
             shortRoute.add(copia);
         }
+        //----------------------------------------------------------------
 
         System.out.println(shortRoute);
 
         System.out.println(cities);
 
+        //----------------------------------------------------------------
         //Floyd
         for(int k=0;k<kValue.size();k++){
             for(int i=0;i<kValue.size();i++){
@@ -125,6 +179,7 @@ public class Graph {
                     }
                 }
             }
+            //----------------------------------------------------------------
             System.out.println("K = "+k);
             System.out.println(shortRoute);
             System.out.println(cities);
@@ -132,8 +187,10 @@ public class Graph {
         }
         System.out.println(shortRoute);
         System.out.println(cities);
+        //----------------------------------------------------------------
         arrivalRoutes = cities;
         floydVector = shortRoute;
+        //----------------------------------------------------------------
         return floydVector;
     }
 

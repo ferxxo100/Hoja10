@@ -18,6 +18,7 @@ public class Main {
         Reader reader = new Reader(initialVector,kValue);
         //--------------------------------------
         finalVector = graph.makeTheFistVector(initialVector,kValue);
+        graph.floydAlgorithm(finalVector,kValue);
         //--------
         while(flag){
             //-------------------OPC---------------------
@@ -63,9 +64,9 @@ public class Main {
                 }
                 //------------------------------------------
             }else if(opc.equals("2")){
-
+                System.out.println("La ciudad centro es: "+graph.centerCity(kValue));
             }else if(opc.equals("3")){
-
+                System.out.println("Que desea modificar?\n");
             }else if(opc.equals("4")){
 
             }
