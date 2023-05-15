@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Vector;
+import java.util.*;
 
 public class Graph {
     Vector<Vector<Object>> arrivalRoutes = new Vector<>();
@@ -10,6 +7,28 @@ public class Graph {
 
     public Graph(){
         this.sc = new Scanner(System.in);
+    }
+
+    public Vector<Vector<Object>> deleteConnection(Vector<Vector<Object>> finalVector,Integer sCityN, Integer fCityN,HashMap<String,Integer> kValue){
+        finalVector.get(sCityN).set(fCityN,"NE");
+        floydAlgorithm(finalVector, kValue);
+        return finalVector;
+    }
+
+    public Vector<Vector<Object>> createNewConnection(Vector<Vector<Object>> initialVector,Vector<Vector<Object>> finalVector,Integer sCityN, Integer fCityN,HashMap<String,Integer> kValue){
+        System.out.println("Ingrese el tiempo entre las dos ciudades con los siguentes climas");
+        System.out.println("Clima normal");
+        String normal = sc.nextLine();
+        System.out.println("Clima con lluvia");
+        String rain = sc.nextLine();
+        System.out.println("Clima con nieve");
+        String snow = sc.nextLine();
+        System.out.println("Clima con tormenta");
+        String storm = sc.nextLine();
+        initialVector.get(sCityN).set(fCityN, Arrays.asList(normal,rain,snow,storm));
+        finalVector.get(sCityN).set(fCityN,Integer.parseInt(normal));
+        floydAlgorithm(finalVector, kValue);
+        return initialVector;
     }
 
     /**

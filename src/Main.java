@@ -87,23 +87,10 @@ public class Main {
                             //------------------------------------------------
                             if((sCityN >= 0 && sCityN<kValue.size()) && (fCityN >= 0 && fCityN<kValue.size())){
                                 if(opc.equals("0")){
-                                    finalVector.get(sCityN).set(fCityN,"NE");
+                                    graph.deleteConnection(finalVector,sCityN,fCityN,kValue);
                                 }else {
-                                    System.out.println("Ingrese el tiempo entre las dos ciudades con los siguentes climas");
-                                    System.out.println("Clima normal");
-                                    String normal = sc.nextLine();
-                                    System.out.println("Clima con lluvia");
-                                    String rain = sc.nextLine();
-                                    System.out.println("Clima con nieve");
-                                    String snow = sc.nextLine();
-                                    System.out.println("Clima con tormenta");
-                                    String storm = sc.nextLine();
-                                    initialVector.get(sCityN).set(fCityN,Arrays.asList(normal,rain,snow,storm));
-                                    finalVector.get(sCityN).set(fCityN,Integer.parseInt(normal));
+                                    graph.createNewConnection(initialVector,finalVector,sCityN,fCityN,kValue);
                                 }
-                                //--------------------------------------
-                                graph.floydAlgorithm(finalVector, kValue);
-                                //-------------------------------------
                             }
                             //------------------------------------------------------
                         }
