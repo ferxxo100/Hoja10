@@ -36,8 +36,6 @@ public class Reader {
                         if (data.length != 6) {
                             System.out.println("Hay un problema en una de las lecturas");
                         } else {
-                            System.out.println("Tamanio de data: " + data.length);
-                            System.out.println("Operacion: " + cadena); //se agrega la operacion leida
 
                             //Preguntar si pongo lowerCase
                             if (!(kValue.containsKey(data[0]))) {
@@ -69,28 +67,18 @@ public class Reader {
                             //Encuentra la posicion que tiene la ciudad de partida y de destino en la matriz
                             Integer ciudadPartida = kValue.get(data[0]);
                             Integer ciudadDestino = kValue.get(data[1]);
-                            System.out.println("Values " + initialVector.size());
 
                             //Crea valores
                             Vector<String> keys = new Vector<>();
                             for (int j = 0; j < kValue.size(); j++) {
                                 keys.add(SupportFunctions.getKeyfromValue(kValue, j));
                             }
-
-                            System.out.println(keys);
                             Vector<Object> partida = initialVector.get(ciudadPartida);
-                            System.out.println("Estamos en vector: " + SupportFunctions.getKeyfromValue(kValue, ciudadPartida));
                             partida.set(ciudadDestino, Arrays.asList(data[2], data[3], data[4], data[5]));
-                            System.out.println(partida);
-
-                            System.out.println("-----------------------------------------------");
                             //Mandaremos a la cadena.
-
-                        }
-                        for (int i = 0; i < initialVector.size(); i++) {
-                            System.out.println(SupportFunctions.getKeyfromValue(kValue, i) + ": " + initialVector.get(i));
                         }
                     }
+                    System.out.println("-----------------------------------------------");
                     return initialVector;
                 } else {
                     System.out.println("El archivo no se encuentra");

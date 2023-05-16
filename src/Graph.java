@@ -1,5 +1,7 @@
 import java.util.*;
 
+import javafx.scene.control.SplitMenuButton;
+
 public class Graph {
     Vector<Vector<Object>> arrivalRoutes = new Vector<>();
     Vector<Vector<Object>> floydVector = new Vector<>();
@@ -70,7 +72,6 @@ public class Graph {
             }
         }
         //-----------------------------------
-        System.out.println(maxVector);
         Object center = 0;
         int contN = 0;
         //-----------------------------------
@@ -101,6 +102,7 @@ public class Graph {
      * @return finalVector
      */
     public Vector<Vector<Object>> makeTheFistVector(Vector<Vector<Object>> initialVector, HashMap<String,Integer> kValue){
+        System.out.println("Ingrese los siguientes climas");
         Vector<Vector<Object>> finalVector =  new Vector<Vector<Object>>(); //Create vector
         for(int i=0;i<initialVector.size();i++){
             Vector<Object> startCity = initialVector.get(i);
@@ -123,6 +125,7 @@ public class Graph {
                             typeW = Integer.parseInt(opc);
                         }
                         NstartCity.add(Integer.parseInt(weather.get(typeW)));
+                        System.out.println("-----------------------------------------------");
                     }else{
                         //If it's not a list, it means there's no path
                         NstartCity.add("NE");
@@ -132,9 +135,6 @@ public class Graph {
             }
             //Add vector to create the new matrix
             finalVector.add(NstartCity);
-        }
-        for(int l = 0; l<initialVector.size();l++){
-            System.out.println(SupportFunctions.getKeyfromValue(kValue,l)+": "+finalVector.get(l));
         }
         return finalVector;
     }
@@ -181,11 +181,6 @@ public class Graph {
             shortRoute.add(copia);
         }
         //----------------------------------------------------------------
-
-        System.out.println(shortRoute);
-
-        System.out.println(cities);
-
         //----------------------------------------------------------------
         //Floyd
         for(int k=0;k<kValue.size();k++){
@@ -212,13 +207,7 @@ public class Graph {
                 }
             }
             //----------------------------------------------------------------
-            System.out.println("K = "+k);
-            System.out.println(shortRoute);
-            System.out.println(cities);
-            System.out.println("------\n");
         }
-        System.out.println(shortRoute);
-        System.out.println(cities);
         //----------------------------------------------------------------
         arrivalRoutes = cities;
         floydVector = shortRoute;

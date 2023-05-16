@@ -23,6 +23,7 @@ public class Main {
             System.out.println("0) Salir\n1) Distancia mas corta entre dos ciudades\n2) Ciudad centro del grafo" +
                     "\n3) Modificar un grafo\n4) Indicar un clima entre ciudades");
             String opc = sc.nextLine();
+            System.out.println("-----------------------------------------------");
             //--------------------------------------------
             if(opc.equals("0")){
                 flag = false;
@@ -139,6 +140,7 @@ public class Main {
                 }
                 //------------------------------------------
             }
+            System.out.println("-----------------------------------------------");
         }
     }
 }
