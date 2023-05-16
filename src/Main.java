@@ -89,7 +89,7 @@ public class Main {
                                 if(opc.equals("0")){
                                     graph.deleteConnection(finalVector,sCityN,fCityN,kValue);
                                 }else {
-                                    graph.createNewConnection(initialVector,finalVector,sCityN,fCityN,kValue);
+                                    graph.createNewConnection(initialVector,finalVector,sCityN,fCityN,kValue,true);
                                 }
                             }
                             //------------------------------------------------------

@@ -15,19 +15,32 @@ public class Graph {
         return finalVector;
     }
 
-    public Vector<Vector<Object>> createNewConnection(Vector<Vector<Object>> initialVector,Vector<Vector<Object>> finalVector,Integer sCityN, Integer fCityN,HashMap<String,Integer> kValue){
-        System.out.println("Ingrese el tiempo entre las dos ciudades con los siguentes climas");
-        System.out.println("Clima normal");
-        String normal = sc.nextLine();
-        System.out.println("Clima con lluvia");
-        String rain = sc.nextLine();
-        System.out.println("Clima con nieve");
-        String snow = sc.nextLine();
-        System.out.println("Clima con tormenta");
-        String storm = sc.nextLine();
+    public Vector<Vector<Object>> createNewConnection(Vector<Vector<Object>> initialVector,Vector<Vector<Object>> finalVector,Integer sCityN, Integer fCityN,HashMap<String,Integer> kValue, boolean flag){
+        String normal;
+        String rain;
+        String snow;
+        String storm ;
+        if(flag){
+            System.out.println("Ingrese el tiempo entre las dos ciudades con los siguentes climas");
+            System.out.println("Clima normal");
+            normal = sc.nextLine();
+            System.out.println("Clima con lluvia");
+            rain = sc.nextLine();
+            System.out.println("Clima con nieve");
+            snow = sc.nextLine();
+            System.out.println("Clima con tormenta");
+            storm = sc.nextLine();
+        }else{
+            normal = "10";
+            rain = "15";
+            snow = "20";
+            storm = "50";
+        }
         initialVector.get(sCityN).set(fCityN, Arrays.asList(normal,rain,snow,storm));
-        finalVector.get(sCityN).set(fCityN,Integer.parseInt(normal));
-        floydAlgorithm(finalVector, kValue);
+        if(flag){
+            finalVector.get(sCityN).set(fCityN,Integer.parseInt(normal));
+            floydAlgorithm(finalVector, kValue);
+        }
         return initialVector;
     }
 
