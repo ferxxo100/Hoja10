@@ -18,6 +18,17 @@ public class Main {
         graph.floydAlgorithm(finalVector,kValue);
         //--------
         while(flag){
+            System.out.println("---------------------------");
+            System.out.println("Vector de adyacencia: ");
+            List<String> list = new ArrayList<>();
+            for(int i=0;i<kValue.size();i++){
+                list.add(SupportFunctions.getKeyfromValue(kValue, i));
+            }
+            System.out.println(list);
+            for(int i=0;i<finalVector.size();i++){
+                System.out.println(finalVector.get(i));
+            }
+            System.out.println("---------------------------");
             //-------------------OPC---------------------
             System.out.println("Ingrese la opcion que quiere");
             System.out.println("0) Salir\n1) Distancia mas corta entre dos ciudades\n2) Ciudad centro del grafo" +
@@ -50,6 +61,7 @@ public class Main {
                             if(graph.getFloydVector().get(sCityN).get(fCityN).equals("NE")){
                                 System.out.println("No hay manera de llegar a el destino");
                             }else{
+                                System.out.println("-----------------------------------------------");
                                 System.out.println("Valor de la ruta mas corta: "+graph.getFloydVector().get(sCityN).get(fCityN));
                                 System.out.println("Recorrido de las ciudades");
                                 System.out.println(SupportFunctions.getKeyfromValue(kValue,sCityN));
@@ -141,6 +153,8 @@ public class Main {
                 //------------------------------------------
             }
             System.out.println("-----------------------------------------------");
+            System.out.println("Presione ENTER para continuar");
+            sc.nextLine();
         }
     }
 }
